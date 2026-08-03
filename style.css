@@ -1,68 +1,197 @@
+/* ==========================================
+   SEÇÃO 1: DESIGN SYSTEM E VARIÁVEIS DE TEMA (LIGHT MODE)
+   Armazena todas as cores e medidas padrões do sistema no tema claro.
+   ========================================== */
 :root {
-  --primary-color: #3b82f6;
-  --primary-hover: #2563eb;
-  --bg-color: #f8fafc;
-  --card-bg: #ffffff;
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --border-color: #e2e8f0;
+  --primary-color: #3b82f6;      /* Cor azul principal dos botões e destaques */
+  --primary-hover: #2563eb;      /* Cor azul mais escura para o efeito hover (passar o mouse) */
+  --bg-color: #f8fafc;           /* Cor de fundo geral da página (Cinza muito claro) */
+  --card-bg: #ffffff;            /* Cor de fundo dos cartões, formulários e tabelas (Branco) */
+  --text-main: #0f172a;          /* Cor de texto principal (Azul escuro/Quase preto para alto contraste) */
+  --text-muted: #64748b;         /* Cor de texto secundário e legendas (Cinza) */
+  --border-color: #e2e8f0;       /* Cor suave para linhas de divisão e bordas */
   
-  --badge-green-bg: #dcfce7;
-  --badge-green-text: #15803d;
-  --badge-yellow-bg: #fef9c3;
-  --badge-yellow-text: #a16207;
+  --badge-green-bg: #dcfce7;     /* Fundo verde claro para a etiqueta 'Disponível' */
+  --badge-green-text: #15803d;   /* Texto verde escuro para a etiqueta 'Disponível' */
+  --badge-yellow-bg: #fef9c3;    /* Fundo amarelo claro para a etiqueta 'Emprestado' */
+  --badge-yellow-text: #a16207;  /* Texto amarelo escuro para a etiqueta 'Emprestado' */
 
-  --danger-color: #ef4444;
-  --danger-hover: #dc2626;
+  --danger-color: #ef4444;       /* Cor vermelha para avisos e exclusões */
+  --danger-hover: #dc2626;       /* Vermelho mais escuro para hover de exclusão */
 
-  --radius: 8px;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --radius: 8px;                 /* Arredondamento padrão dos cantos dos elementos */
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sombra suave dos cards */
 }
 
+/* ==========================================
+   SEÇÃO 2: VARIÁVEIS DO TEMA ESCURO (DARK MODE)
+   Sobrescreve as variáveis quando o atributo `data-theme="dark"` é ativado na tag <html>.
+   ========================================== */
+[data-theme="dark"] {
+  --primary-color: #60a5fa;      /* Azul mais claro e brilhante para destacar no fundo escuro */
+  --primary-hover: #3b82f6;      /* Azul intermediário para o hover */
+  --bg-color: #0f172a;           /* Fundo principal bem escuro (Azul petróleo) */
+  --card-bg: #1e293b;            /* Fundo dos cartões em tom escuro intermediário */
+  --text-main: #f8fafc;          /* Texto principal em branco leve para fácil leitura */
+  --text-muted: #94a3b8;         /* Texto secundário em cinza claro */
+  --border-color: #334155;       /* Bordas em tom cinza escuro para divisão discreta */
+
+  --badge-green-bg: #064e3b;     /* Fundo verde escuro para a badge 'Disponível' no dark mode */
+  --badge-green-text: #6ee7b7;   /* Texto verde neon suave */
+  --badge-yellow-bg: #713f12;    /* Fundo marrom/amarelo escuro para a badge 'Emprestado' */
+  --badge-yellow-text: #fde047;  /* Texto amarelo brilhante */
+}
+
+/* ==========================================
+   SEÇÃO 3: RESET GLOBAL E ESTILOS BASE
+   Padroniza as margens e comportamentos básicos de todos os elementos HTML.
+   ========================================== */
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  box-sizing: border-box; /* Inclui bordas e paddings no cálculo da largura total dos elementos */
+  margin: 0;              /* Remove margens padrão do navegador */
+  padding: 0;             /* Remove espaçamentos internos padrão */
+  transition: background-color 0.2s ease, color 0.2s ease; /* Animação suave na troca de cores de tema */
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-main);
-  line-height: 1.5;
-  padding-bottom: 2rem;
+  font-family: 'Inter', sans-serif; /* Aplica a tipografia moderna Inter em todo o site */
+  background-color: var(--bg-color);/* Aplica a cor de fundo dinamicamente baseada no tema */
+  color: var(--text-main);          /* Aplica a cor de texto padrão */
+  line-height: 1.5;                 /* Ajusta a altura da linha para facilitar a leitura */
+  padding-bottom: 2rem;             /* Garante espaçamento ao final da página */
 }
 
+/* Classe utilitária para centralizar o conteúdo com uma largura máxima padrão */
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  max-width: 1200px; /* Impede que a tela se estique demais em monitores ultrawide */
+  margin: 0 auto;    /* Centraliza o container horizontalmente */
+  padding: 0 1rem;   /* Adiciona margem de segurança nas laterais */
 }
 
-/* Header */
+/* ==========================================
+   SEÇÃO 4: CABEÇALHO (HEADER)
+   ========================================== */
 .main-header {
-  background-color: var(--card-bg);
-  border-bottom: 1px solid var(--border-color);
-  padding: 1.5rem 0;
-  margin-bottom: 2rem;
+  background-color: var(--card-bg); /* Cor de fundo do cabeçalho */
+  border-bottom: 1px solid var(--border-color); /* Linha sutil de separação na parte inferior */
+  padding: 1.25rem 0;               /* Espaçamento vertical interno */
+  margin-bottom: 2rem;              /* Afasta o cabeçalho do conteúdo principal */
+}
+
+/* Organiza o conteúdo interno do cabeçalho em linha com Flexbox */
+.header-content {
+  display: flex;                   /* Ativa o modo de layout flexível */
+  justify-content: space-between;  /* Empurra o título para a esquerda e os botões para a direita */
+  align-items: center;             /* Alinha os elementos verticalmente no centro */
+  flex-wrap: wrap;                 /* Quebra a linha automaticamente em celulares pequenos */
+  gap: 1rem;                       /* Espaçamento mínimo entre os elementos */
 }
 
 .main-header h1 {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--primary-color);
+  font-size: 1.75rem;              /* Tamanho de fonte destacado para o título */
+  font-weight: 700;                /* Peso da fonte em negrito */
+  color: var(--primary-color);     /* Cor com destaque da marca */
 }
 
 .main-header p {
-  color: var(--text-muted);
-  font-size: 0.9rem;
+  color: var(--text-muted);        /* Texto de descrição em tom secundário */
+  font-size: 0.9rem;               /* Tamanho de fonte levemente menor */
 }
 
-/* Indicadores */
+/* Agrupa os botões e o relógio no canto direito do cabeçalho */
+.header-right {
+  display: flex;                   /* Coloca os itens em linha */
+  align-items: center;             /* Centraliza verticalmente */
+  gap: 1rem;                       /* Espaço de 1rem entre cada widget */
+}
+
+/* ==========================================
+   SEÇÃO 5: WIDGET DE DATA E HORA
+   ========================================== */
+.widget-datetime {
+  background-color: var(--bg-color); /* Fundo contrastante com o cabeçalho */
+  border: 1px solid var(--border-color); /* Borda fina arredondada */
+  border-radius: var(--radius);
+  padding: 0.4rem 0.8rem;            /* Espaçamento interno confortável */
+  text-align: right;                 /* Alinha o texto à direita */
+  font-size: 0.8rem;                 /* Fonte compacta */
+}
+
+.widget-date {
+  color: var(--text-muted);          /* Data em cor secundária discreta */
+  font-weight: 500;
+}
+
+.widget-time {
+  color: var(--primary-color);       /* Hora em tom azul destacado */
+  font-weight: 700;                  /* Texto em negrito */
+  font-family: monospace;            /* Fonte monoespaçada para os números não balançarem */
+  font-size: 0.95rem;
+}
+
+/* ==========================================
+   SEÇÃO 6: BOTÃO DE TEMA (SOL/LUA)
+   ========================================== */
+.btn-theme {
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius);
+  cursor: pointer;                   /* Transforma o ponteiro do mouse em mãozinha clicável */
+  font-size: 1.1rem;
+}
+
+/* ==========================================
+   SEÇÃO 7: TELA DE AUTENTICAÇÃO (LOGIN / CADASTRO)
+   ========================================== */
+.auth-card {
+  max-width: 400px;                  /* Largura máxima do cartão de login */
+  margin: 3rem auto;                 /* Centraliza horizontalmente com espaço no topo */
+  background-color: var(--card-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+  box-shadow: var(--shadow);          /* Aplica sombra para dar profundidade de cartão */
+}
+
+/* Abas de alternância entre Login e Cadastro */
+.auth-tabs {
+  display: flex;                     /* Distribui as duas abas lado a lado */
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.auth-tab {
+  flex: 1;                           /* Faz cada aba ocupar exatamente 50% da largura */
+  padding: 0.5rem;
+  background: none;                  /* Remove fundo padrão do botão */
+  border: none;                      /* Remove bordas padrão */
+  color: var(--text-muted);
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2px solid transparent; /* Reserva espaço para a linha da aba ativa */
+}
+
+/* Estilo da aba que está selecionada no momento */
+.auth-tab.active {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color); /* Linha azul abaixo da aba ativa */
+}
+
+.auth-form h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+/* ==========================================
+   SEÇÃO 8: CARDS DE ESTATÍSTICAS / DASHBOARD
+   ========================================== */
 .stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  display: grid;                     /* Layout em Grid automático */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Cria colunas responsivas dinâmicas */
+  gap: 1rem;                         /* Espaço de 1rem entre os cartões */
   margin-bottom: 2rem;
 }
 
@@ -73,14 +202,14 @@ body {
   padding: 1.25rem;
   box-shadow: var(--shadow);
   display: flex;
-  flex-direction: column;
+  flex-direction: column;            /* Organiza o título em cima e o número embaixo */
 }
 
 .stat-title {
   font-size: 0.85rem;
   color: var(--text-muted);
   font-weight: 500;
-  text-transform: uppercase;
+  text-transform: uppercase;          /* Deixa o texto em letras maiúsculas */
 }
 
 .stat-number {
@@ -89,21 +218,26 @@ body {
   margin-top: 0.25rem;
 }
 
-/* App Layout Grid */
+/* ==========================================
+   SEÇÃO 9: LAYOUT PRINCIPAL (SPLIT GRID)
+   ========================================== */
 .app-layout {
   display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 2rem;
-  align-items: start;
+  grid-template-columns: 320px 1fr;  /* Formulário com 320px fixos à esquerda e Tabela ocupando o resto */
+  gap: 2rem;                         /* Espaçamento grande entre o formulário e a tabela */
+  align-items: start;                /* Alinha os blocos pelo topo */
 }
 
+/* Regra de responsividade para telas menores que 900px (Tablets e Celulares) */
 @media (max-width: 900px) {
   .app-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr;      /* Converte a tela para 1 única coluna vertical acumulada */
   }
 }
 
-/* Form Styles */
+/* ==========================================
+   SEÇÃO 10: FORMULÁRIO E SEÇÃO DA TABELA
+   ========================================== */
 .form-section, .table-section {
   background-color: var(--card-bg);
   border-radius: var(--radius);
@@ -117,15 +251,17 @@ body {
   margin-bottom: 1.25rem;
 }
 
+/* Organização dos inputs em grupos verticais */
 .form-group {
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
 }
 
+/* Agrupa dois campos lado a lado dentro do formulário */
 .form-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;    /* 50% de largura para cada campo */
   gap: 0.75rem;
 }
 
@@ -135,18 +271,21 @@ label {
   margin-bottom: 0.35rem;
 }
 
+/* Estilização padronizada de caixas de texto e seletores */
 input, select {
   padding: 0.6rem 0.75rem;
   border: 1px solid var(--border-color);
   border-radius: 6px;
   font-size: 0.9rem;
-  font-family: inherit;
-  outline: none;
-  transition: border-color 0.2s;
+  font-family: inherit;              /* Herda a fonte 'Inter' do body */
+  outline: none;                     /* Remove o contorno padrão do navegador ao focar */
+  background-color: var(--card-bg);
+  color: var(--text-main);
 }
 
+/* Efeito visual ao clicar/focar num campo de texto */
 input:focus, select:focus {
-  border-color: var(--primary-color);
+  border-color: var(--primary-color);/* Destaca a borda do campo em azul */
 }
 
 .form-actions {
@@ -155,7 +294,9 @@ input:focus, select:focus {
   margin-top: 1.25rem;
 }
 
-/* Botões */
+/* ==========================================
+   SEÇÃO 11: BOTÕES
+   ========================================== */
 .btn {
   padding: 0.6rem 1rem;
   border-radius: 6px;
@@ -163,13 +304,12 @@ input:focus, select:focus {
   font-size: 0.9rem;
   cursor: pointer;
   border: none;
-  transition: background-color 0.2s;
 }
 
 .btn-primary {
   background-color: var(--primary-color);
   color: white;
-  width: 100%;
+  width: 100%;                       /* Botão de largura total */
 }
 
 .btn-primary:hover {
@@ -177,14 +317,11 @@ input:focus, select:focus {
 }
 
 .btn-secondary {
-  background-color: #e2e8f0;
-  color: #334155;
+  background-color: var(--border-color);
+  color: var(--text-main);
 }
 
-.btn-secondary:hover {
-  background-color: #cbd5e1;
-}
-
+/* Botões pequenos de ação da tabela */
 .btn-action {
   padding: 0.3rem 0.6rem;
   font-size: 0.8rem;
@@ -192,24 +329,28 @@ input:focus, select:focus {
 }
 
 .btn-edit {
-  background-color: #e0f2fe;
-  color: #0369a1;
+  background-color: #e0f2fe;        /* Azul bem claro */
+  color: #0369a1;                    /* Texto azul escuro */
 }
 
-.btn-edit:hover {
-  background-color: #bae6fd;
+[data-theme="dark"] .btn-edit {
+  background-color: #075985;        /* Ajuste do botão editar no dark mode */
+  color: #e0f2fe;
 }
 
 .btn-delete {
-  background-color: #fee2e2;
-  color: #b91c1c;
+  background-color: #fee2e2;        /* Vermelho bem claro */
+  color: #b91c1c;                    /* Texto vermelho escuro */
 }
 
-.btn-delete:hover {
-  background-color: #fca5a5;
+[data-theme="dark"] .btn-delete {
+  background-color: #991b1b;        /* Ajuste do botão excluir no dark mode */
+  color: #fee2e2;
 }
 
-/* Tabela e Busca */
+/* ==========================================
+   SEÇÃO 12: TABELA DE DADOS E BUSCA
+   ========================================== */
 .table-header-controls {
   display: flex;
   justify-content: space-between;
@@ -220,22 +361,22 @@ input:focus, select:focus {
 }
 
 .search-box input {
-  min-width: 260px;
+  min-width: 260px;                  /* Define uma largura mínima confortável para a busca */
 }
 
 .table-responsive {
-  overflow-x: auto;
+  overflow-x: auto;                  /* Adiciona barra de rolagem horizontal se a tabela for muito larga */
 }
 
 table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: collapse;         /* Remove espaço duplo entre bordas de células */
   text-align: left;
 }
 
 th, td {
   padding: 0.75rem 0.5rem;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color); /* Linha divisória entre cada linha da tabela */
   font-size: 0.9rem;
 }
 
@@ -244,6 +385,7 @@ th {
   font-weight: 600;
 }
 
+/* Botão invisível do cabeçalho da tabela usado para ordenação */
 .btn-sort {
   background: none;
   border: none;
@@ -252,16 +394,34 @@ th {
   cursor: pointer;
   padding: 0;
   font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .btn-sort:hover {
   color: var(--primary-color);
 }
 
-/* Badges de Status */
+.sort-indicator {
+  font-size: 0.75rem;
+  opacity: 0.5;                      /* Seta opaca quando não está filtrando */
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+/* Seta destacada quando a coluna é a selecionada no momento */
+.sort-indicator.active-sort {
+  opacity: 1;                        /* Torna a seta 100% visível */
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* ==========================================
+   SEÇÃO 13: ETIQUETAS DE STATUS (BADGES)
+   ========================================== */
 .badge {
   padding: 0.25rem 0.5rem;
-  border-radius: 12px;
+  border-radius: 12px;                /* Cantos totalmente arredondados formato pílula */
   font-size: 0.75rem;
   font-weight: 600;
   display: inline-block;
@@ -277,10 +437,15 @@ th {
   color: var(--badge-yellow-text);
 }
 
+/* ==========================================
+   SEÇÃO 14: CLASSES UTILITÁRIAS
+   ========================================== */
+/* Esconde qualquer elemento da tela quando adicionada */
 .hidden {
   display: none !important;
 }
 
+/* Estilização para estados vazios ou de carregamento da tabela */
 .table-loading, .table-empty {
   text-align: center;
   color: var(--text-muted);
