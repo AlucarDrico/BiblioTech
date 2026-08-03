@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BiblioTech — Gerenciamento de Acervo</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Fonte Google Inter para Tipografia Limpa -->
+   <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="main-header">
+
+    <div class="container">
+      <h1>BiblioTech 📚</h1>
+      <p>Sistema de Gerenciamento de Acervo Escolar e Comunitário</p>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <!-- Painel de Indicadores -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-title">Total no Acervo</span>
+        <span id="stat-total" class="stat-number">0</span>
+      </div>
+      <div class="stat-card stat-card-available">
+        <span class="stat-title">Disponíveis</span>
+        <span id="stat-disponivel" class="stat-number">0</span>
+      </div>
+      <div class="stat-card stat-card-borrowed">
+        <span class="stat-title">Emprestados</span>
+        <span id="stat-emprestado" class="stat-number">0</span>
+      </div>
+    </section>
+
+    <div class="app-layout">
+      
+      <!-- Formulário de Entrada -->
+      <section class="form-section">
+        <h2 id="form-title">Cadastrar Novo Livro</h2>
+        
+        <form id="book-form">
+          <!-- Campo Oculto para ID do Documento (Edição) -->
+          <input type="hidden" id="book-id">
+
+          <div class="form-group">
+            <label for="title">Título *</label>
+            <input type="text" id="title" required placeholder="Ex: Dom Casmurro">
+          </div>
+
+          <div class="form-group">
+            <label for="author">Autor *</label>
+            <input type="text" id="author" required placeholder="Ex: Machado de Assis">
+          </div>
+
+          <div class="form-group">
+            <label for="genre">Gênero *</label>
+            <input type="text" id="genre" required placeholder="Ex: Romance / Literatura Brasileira">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="year">Ano Publicação *</label>
+              <input type="number" id="year" required min="1000" max="2099" placeholder="Ex: 1899">
+            </div>
+
+            <div class="form-group">
+              <label for="status">Status *</label>
+              <select id="status" required>
+                <option value="Disponível">Disponível</option>
+                <option value="Emprestado">Emprestado</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" id="btn-submit" class="btn btn-primary">Salvar Livro</button>
+            <button type="button" id="btn-cancel" class="btn btn-secondary hidden">Cancelar Edição</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Tabela e Pesquisa -->
+      <section class="table-section">
+        <div class="table-header-controls">
+          <h2>Acervo da Biblioteca</h2>
+          <div class="search-box">
+            <input type="text" id="search-input" placeholder="Buscar por título ou autor...">
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  <button type="button" class="btn-sort" id="sort-title">
+                    Título <span class="sort-icon">↕</span>
+                  </button>
+                </th>
+                <th>Autor</th>
+                <th>Gênero</th>
+                <th>
+                  <button type="button" class="btn-sort" id="sort-year">
+                    Ano <span class="sort-icon">↕</span>
+                  </button>
+                </th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="books-table-body">
+              <tr>
+                <td colspan="6" class="table-loading">Carregando acervo...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- Script principal importado como Módulo ES6 -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
