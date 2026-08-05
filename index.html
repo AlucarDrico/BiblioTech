@@ -1,292 +1,283 @@
-<!-- Declara ao navegador que este arquivo é um documento HTML5 moderno -->
 <!DOCTYPE html>
-
-<!-- Tag raiz do documento definindo o idioma principal como Português do Brasil -->
 <html lang="pt-BR">
-
-<!-- Cabeçalho de configurações técnicas do documento (não visível na página) -->
 <head>
-  <!-- Define a codificação de caracteres como UTF-8 para aceitar acentos e ç corretamente -->
   <meta charset="UTF-8">
-
-  <!-- Configura a viewport para garantir responsividade em celulares e tablets -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Define o título que aparece na aba do navegador -->
-  <title>BiblioTech — Gerenciamento de Acervo</title>
-
-  <!-- Vincula o arquivo de estilos CSS externo a este HTML -->
+  <title>BiblioTech — Gerenciamento de Acervo e Empréstimos</title>
   <link rel="stylesheet" href="style.css">
-
-  <!-- Configura o ícone (favicon) exibido na aba do navegador -->
   <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
-
-  <!-- Preconecta aos servidores do Google Fonts para agilizar o carregamento da fonte -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-
-  <!-- Preconecta ao servidor estático do Google Fonts permitindo CORS -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <!-- Carrega a família tipográfica 'Inter' do Google Fonts em diferentes pesos (400, 500, 600, 700) -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-
-<!-- Corpo visual da página onde fica todo o conteúdo acessível ao usuário -->
 <body>
 
-  <!-- CABEÇALHO PRINCIPAL DO SISTEMA -->
-  <!-- Tag semântica header para guardar a marca, relógio e botões superiores -->
+  <!-- CABEÇALHO PRINCIPAL -->
   <header class="main-header">
-    
-    <!-- Container centralizador de largura máxima para manter tudo alinhado -->
     <div class="container header-content">
-      
-      <!-- Bloco contendo o título do aplicativo e sua descrição -->
       <div>
-        <!-- Título principal do sistema com emoji visual -->
         <h1>BiblioTech 📚</h1>
-        <!-- Subtítulo informativo da aplicação -->
         <p>Sistema de Gerenciamento de Acervo Escolar e Comunitário</p>
       </div>
 
-      <!-- Bloco do lado direito do cabeçalho com widgets e controles -->
       <div class="header-right">
-        
-        <!-- Widget que exibe a data e a hora atualizadas em tempo real -->
+        <!-- Badge indicadora do Perfil RBAC -->
+        <div id="user-role-badge" class="badge badge-role hidden">Carregando perfil...</div>
+
         <div class="widget-datetime" id="widget-datetime">
-          <!-- Div onde o JavaScript insere a data formatada -->
           <div id="widget-date" class="widget-date">--/--/----</div>
-          <!-- Div onde o JavaScript insere o relógio digital em tempo real -->
           <div id="widget-time" class="widget-time">00:00:00</div>
         </div>
 
-        <!-- Botão para alternar entre Modo Claro (Light) e Modo Escuro (Dark) -->
         <button id="theme-toggle" class="btn-theme" title="Alternar Tema">
-          <!-- Ícone que muda dinamicamente entre Lua e Sol via JS -->
           <span id="theme-icon">🌙</span>
         </button>
 
-        <!-- Botão de encerrar a sessão (Logout). Inicia oculto com a classe 'hidden' -->
         <button id="btn-logout" class="btn btn-secondary hidden">Sair</button>
       </div>
     </div>
   </header>
 
-  <!-- CONTEÚDO PRINCIPAL (MÓDULOS DE AUTENTICAÇÃO E CRUDS) -->
-  <!-- Tag semântica main que abriga a aplicação principal -->
+  <!-- CONTEÚDO PRINCIPAL -->
   <main class="container">
 
-    <!-- TELA DE AUTENTICAÇÃO (LOGIN E CADASTRO) -->
-    <!-- Seção do cartão de acesso, controlada pelo JavaScript para sumir após o login -->
+    <!-- TELA DE AUTENTICAÇÃO -->
     <section id="auth-section" class="auth-card">
-      
-      <!-- Abas superiores para alternar entre as telas de Entrar e Cadastrar -->
       <div class="auth-tabs">
-        <!-- Aba ativada por padrão para efetuar login -->
         <button id="tab-login" class="auth-tab active">Entrar</button>
-        <!-- Aba para alternar para o formulário de cadastro -->
         <button id="tab-register" class="auth-tab">Cadastrar</button>
       </div>
 
       <!-- FORMULÁRIO DE LOGIN -->
       <form id="login-form" class="auth-form">
-        <!-- Título da caixa de login -->
         <h2>Acessar o Sistema</h2>
-        
-        <!-- Grupo de campo para entrada do E-mail -->
         <div class="form-group">
-          <!-- Rótulo de texto associado ao input pelo id 'login-email' -->
           <label for="login-email">E-mail</label>
-          <!-- Campo para digitação de e-mail com validação nativa e preenchimento obrigatório -->
           <input type="email" id="login-email" required placeholder="seu@email.com">
         </div>
-        
-        <!-- Grupo de campo para entrada da Senha -->
         <div class="form-group">
-          <!-- Rótulo para a senha de login -->
           <label for="login-password">Senha</label>
-          <!-- Campo do tipo password que oculta os caracteres digitados por segurança -->
           <input type="password" id="login-password" required placeholder="******">
         </div>
-        
-        <!-- Botão de submissão do formulário de login -->
         <button type="submit" class="btn btn-primary">Entrar</button>
       </form>
 
-      <!-- FORMULÁRIO DE CADASTRO (Inicia oculto) -->
+      <!-- FORMULÁRIO DE CADASTRO -->
       <form id="register-form" class="auth-form hidden">
-        <!-- Título do formulário de cadastro -->
         <h2>Criar Nova Conta</h2>
-        
-        <!-- Grupo de campo para cadastro do E-mail -->
         <div class="form-group">
           <label for="reg-email">E-mail</label>
           <input type="email" id="reg-email" required placeholder="seu@email.com">
         </div>
-        
-        <!-- Grupo de campo para cadastro da Senha -->
         <div class="form-group">
           <label for="reg-password">Senha (Mín. 6 caracteres)</label>
-          <!-- Define comprimento mínimo de 6 caracteres para aceitação no Firebase -->
           <input type="password" id="reg-password" required minlength="6" placeholder="******">
         </div>
-        
-        <!-- Botão de envio para registrar nova conta -->
+        <!-- Seleção do Papel (RBAC) no Cadastro -->
+        <div class="form-group">
+          <label for="reg-role">Perfil de Acesso</label>
+          <select id="reg-role" required>
+            <option value="reader">Leitor (Somente Leitura)</option>
+            <option value="admin">Administrador / Bibliotecário (Acesso Total)</option>
+          </select>
+        </div>
         <button type="submit" class="btn btn-primary">Cadastrar</button>
       </form>
     </section>
 
-    <!-- ÁREA PRINCIPAL DA APLICAÇÃO (Aparece apenas quando o usuário está logado) -->
+    <!-- ÁREA PRINCIPAL DA APLICAÇÃO -->
     <div id="app-content" class="hidden">
       
-      <!-- PAINEL DE INDICADORES / CARDS DE DASHBOARD -->
+      <!-- DASHBOARD DE ESTATÍSTICAS -->
       <section class="stats-grid">
-        
-        <!-- Card 1: Total Geral no Acervo -->
         <div class="stat-card">
           <span class="stat-title">Total no Acervo</span>
-          <!-- Número dinâmico preenchido pelo JS -->
           <span id="stat-total" class="stat-number">0</span>
         </div>
-        
-        <!-- Card 2: Total de Livros Disponíveis -->
         <div class="stat-card stat-card-available">
           <span class="stat-title">Disponíveis</span>
-          <!-- Número dinâmico preenchido pelo JS -->
           <span id="stat-disponivel" class="stat-number">0</span>
         </div>
-        
-        <!-- Card 3: Total de Livros Emprestados -->
         <div class="stat-card stat-card-borrowed">
           <span class="stat-title">Emprestados</span>
-          <!-- Número dinâmico preenchido pelo JS -->
           <span id="stat-emprestado" class="stat-number">0</span>
+        </div>
+        <div class="stat-card stat-card-fines">
+          <span class="stat-title">Multas Pendentes</span>
+          <span id="stat-multas" class="stat-number">R$ 0,00</span>
         </div>
       </section>
 
-      <!-- LAYOUT EM GRID DUPLO (Formulário à esquerda / Tabela à direita) -->
-      <div class="app-layout">
-        
-        <!-- SEÇÃO DO FORMULÁRIO DE CADASTRO E EDIÇÃO DE LIVROS -->
-        <section class="form-section">
-          <!-- Título que muda dinamicamente entre 'Cadastrar' e 'Editar' via JS -->
-          <h2 id="form-title">Cadastrar Novo Livro</h2>
+      <!-- NAVEGAÇÃO DE ABAS INTERNAS (SISTEMA) -->
+      <nav class="nav-tabs">
+        <button id="nav-tab-books" class="nav-tab active">📚 Acervo de Livros</button>
+        <button id="nav-tab-loans" class="nav-tab">📋 Gestão de Empréstimos</button>
+      </nav>
+
+      <!-- VIEW 1: GESTÃO DO ACERVO DE LIVROS -->
+      <div id="view-books" class="view-panel">
+        <div class="app-layout">
           
-          <!-- Formulário do livro -->
-          <form id="book-form">
-            <!-- Campo oculto para armazenar o ID do documento quando estiver editando -->
-            <input type="hidden" id="book-id">
+          <!-- FORMULÁRIO DE LIVROS (Exclusivo para ADMIN) -->
+          <section id="book-form-section" class="form-section admin-only hidden">
+            <h2 id="form-title">Cadastrar Novo Livro</h2>
+            <form id="book-form">
+              <input type="hidden" id="book-id">
 
-            <!-- Campo para Título do Livro -->
-            <div class="form-group">
-              <label for="title">Título *</label>
-              <input type="text" id="title" required placeholder="Ex: Dom Casmurro">
-            </div>
-
-            <!-- Campo para Autor do Livro -->
-            <div class="form-group">
-              <label for="author">Autor *</label>
-              <input type="text" id="author" required placeholder="Ex: Machado de Assis">
-            </div>
-
-            <!-- Campo para Gênero Literário -->
-            <div class="form-group">
-              <label for="genre">Gênero *</label>
-              <input type="text" id="genre" required placeholder="Ex: Romance / Literatura Brasileira">
-            </div>
-
-            <!-- Linha composta com dois campos lado a lado -->
-            <div class="form-row">
-              <!-- Campo para Ano de Publicação -->
               <div class="form-group">
-                <label for="year">Ano Publicação *</label>
-                <!-- Restringe entrada apenas a números entre os anos 1000 e 2099 -->
-                <input type="number" id="year" required min="1000" max="2099" placeholder="Ex: 1899">
+                <label for="title">Título *</label>
+                <input type="text" id="title" required placeholder="Ex: Dom Casmurro">
               </div>
 
-              <!-- Campo de Seleção do Status -->
               <div class="form-group">
-                <label for="status">Status *</label>
-                <!-- Menu suspenso de opções -->
-                <select id="status" required>
-                  <option value="Disponível">Disponível</option>
-                  <option value="Emprestado">Emprestado</option>
+                <label for="author">Autor *</label>
+                <input type="text" id="author" required placeholder="Ex: Machado de Assis">
+              </div>
+
+              <div class="form-group">
+                <label for="genre">Gênero *</label>
+                <input type="text" id="genre" required placeholder="Ex: Romance / Literatura">
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="year">Ano Publicação *</label>
+                  <input type="number" id="year" required min="1000" max="2099" placeholder="Ex: 1899">
+                </div>
+
+                <div class="form-group">
+                  <label for="status">Status *</label>
+                  <select id="status" required>
+                    <option value="Disponível">Disponível</option>
+                    <option value="Emprestado">Emprestado</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Upload da Imagem da Capa -->
+              <div class="form-group">
+                <label for="cover-image">Capa do Livro (Imagem)</label>
+                <input type="file" id="cover-image" accept="image/*">
+                <small class="help-text">Formatos aceitos: JPG, PNG, WEBP.</small>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" id="btn-submit" class="btn btn-primary">Salvar Livro</button>
+                <button type="button" id="btn-cancel" class="btn btn-secondary hidden">Cancelar</button>
+              </div>
+            </form>
+          </section>
+
+          <!-- SEÇÃO DA GALERIA / TABELA DE EXIBIÇÃO -->
+          <section id="display-section" class="table-section full-width">
+            <div class="table-header-controls">
+              <h2>Acervo da Biblioteca</h2>
+              
+              <div class="controls-right">
+                <!-- Alternador de Modos de Exibição (Cards vs Tabela) -->
+                <div class="view-toggle">
+                  <button id="toggle-gallery-view" class="btn-toggle active" title="Modo Galeria">🖼️ Galeria</button>
+                  <button id="toggle-table-view" class="btn-toggle" title="Modo Tabela">📄 Tabela</button>
+                </div>
+
+                <div class="search-box">
+                  <input type="text" id="search-input" placeholder="Buscar por título ou autor...">
+                </div>
+              </div>
+            </div>
+
+            <!-- CONTAINER MODO GALERIA (CARDS COM MINIATURAS) -->
+            <div id="books-gallery-container" class="books-grid">
+              <!-- Preenchido via JS -->
+            </div>
+
+            <!-- CONTAINER MODO TABELA -->
+            <div id="books-table-container" class="table-responsive hidden">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Capa</th>
+                    <th><button type="button" class="btn-sort" id="sort-title">Título <span class="sort-indicator" id="indicator-title">↕</span></button></th>
+                    <th><button type="button" class="btn-sort" id="sort-author">Autor <span class="sort-indicator" id="indicator-author">↕</span></button></th>
+                    <th>Gênero</th>
+                    <th><button type="button" class="btn-sort" id="sort-year">Ano <span class="sort-indicator" id="indicator-year">↕</span></button></th>
+                    <th>Status</th>
+                    <th class="admin-only">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="books-table-body">
+                  <tr><td colspan="7" class="table-loading">Carregando acervo...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+        </div>
+      </div>
+
+      <!-- VIEW 2: GESTÃO DE EMPRÉSTIMOS E MULTAS (/loans) -->
+      <div id="view-loans" class="view-panel hidden">
+        <div class="app-layout">
+          
+          <!-- FORMULÁRIO DE NOVO EMPRÉSTIMO (Somente ADMIN) -->
+          <section class="form-section admin-only hidden">
+            <h2>Registrar Empréstimo</h2>
+            <form id="loan-form">
+              <div class="form-group">
+                <label for="loan-book-select">Livro (Somente Disponíveis) *</label>
+                <select id="loan-book-select" required>
+                  <option value="">Selecione um livro...</option>
                 </select>
               </div>
+
+              <div class="form-group">
+                <label for="loan-student-name">Nome do Leitor / Aluno *</label>
+                <input type="text" id="loan-student-name" required placeholder="Ex: João Silva">
+              </div>
+
+              <div class="form-group">
+                <label for="loan-student-email">E-mail do Leitor *</label>
+                <input type="email" id="loan-student-email" required placeholder="leitor@email.com">
+              </div>
+
+              <div class="form-group">
+                <label for="loan-due-date">Data Prevista para Devolução *</label>
+                <input type="date" id="loan-due-date" required>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Concluir Empréstimo</button>
+            </form>
+          </section>
+
+          <!-- TABELA DE EMPRÉSTIMOS ATIVOS E HISTÓRICO -->
+          <section class="table-section full-width">
+            <h2>Histórico e Registro de Empréstimos</h2>
+            <div class="table-responsive" style="margin-top: 1rem;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Livro</th>
+                    <th>Leitor / Aluno</th>
+                    <th>Data Retirada</th>
+                    <th>Data Prevista</th>
+                    <th>Status</th>
+                    <th>Multa (Atraso)</th>
+                    <th class="admin-only">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="loans-table-body">
+                  <tr><td colspan="7" class="table-loading">Carregando empréstimos...</td></tr>
+                </tbody>
+              </table>
             </div>
+          </section>
 
-            <!-- Botões de Ação do Formulário -->
-            <div class="form-actions">
-              <button type="submit" id="btn-submit" class="btn btn-primary">Salvar Livro</button>
-              <!-- Botão de Cancelar que inicia oculto e só aparece em edições -->
-              <button type="button" id="btn-cancel" class="btn btn-secondary hidden">Cancelar Edição</button>
-            </div>
-          </form>
-        </section>
-
-        <!-- SEÇÃO DA TABELA DE EXIBIÇÃO E BUSCA -->
-        <section class="table-section">
-          
-          <!-- Cabeçalho da tabela contendo o título e a barra de busca -->
-          <div class="table-header-controls">
-            <h2>Acervo da Biblioteca</h2>
-            
-            <!-- Caixa de entrada da busca por texto -->
-            <div class="search-box">
-              <input type="text" id="search-input" placeholder="Buscar por título ou autor...">
-            </div>
-          </div>
-
-          <!-- Wrapper para permitir rolagem horizontal em telas pequenas de celular -->
-          <div class="table-responsive">
-            <table>
-              <!-- Cabeçalho das colunas da tabela -->
-              <thead>
-                <tr>
-                  <!-- Coluna com botão clicável para ordenação por Título -->
-                  <th>
-                    <button type="button" class="btn-sort" id="sort-title">
-                      Título <span class="sort-icon sort-indicator" id="indicator-title">↕</span>
-                    </button>
-                  </th>
-                  <!-- Coluna com botão clicável para ordenação por Autor -->
-                  <th>
-                    <button type="button" class="btn-sort" id="sort-author">
-                      Autor <span class="sort-icon sort-indicator" id="indicator-author">↕</span>
-                    </button>
-                  </th>
-                  <!-- Coluna de Gênero -->
-                  <th>Gênero</th>
-                  <!-- Coluna com botão clicável para ordenação por Ano -->
-                  <th>
-                    <button type="button" class="btn-sort" id="sort-year">
-                      Ano <span class="sort-icon sort-indicator" id="indicator-year">↕</span>
-                    </button>
-                  </th>
-                  <!-- Coluna de Status do Livro -->
-                  <th>Status</th>
-                  <!-- Coluna dos botões de ação (Editar/Excluir) -->
-                  <th>Ações</th>
-                </tr>
-              </thead>
-              
-              <!-- Corpo da tabela onde o JavaScript insere dinamicamente as linhas `<tr>` -->
-              <tbody id="books-table-body">
-                <tr>
-                  <!-- Mensagem inicial de carregamento exibida até os dados chegarem do banco -->
-                  <td colspan="6" class="table-loading">Carregando acervo...</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
+        </div>
       </div>
-    </div>
 
+    </div>
   </main>
 
-  <!-- Importa o script JavaScript principal configurado como Módulo ES6 para aceitar `import/export` -->
   <script type="module" src="app.js"></script>
 </body>
 </html>

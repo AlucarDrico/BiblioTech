@@ -1,198 +1,168 @@
-/* ==========================================
-   SEÇÃO 1: DESIGN SYSTEM E VARIÁVEIS DE TEMA (LIGHT MODE)
-   Armazena todas as cores e medidas padrões do sistema no tema claro.
-   ========================================== */
 :root {
-  --primary-color: #3b82f6;      /* Cor azul principal dos botões e destaques */
-  --primary-hover: #2563eb;      /* Cor azul mais escura para o efeito hover (passar o mouse) */
-  --bg-color: #f8fafc;           /* Cor de fundo geral da página (Cinza muito claro) */
-  --card-bg: #ffffff;            /* Cor de fundo dos cartões, formulários e tabelas (Branco) */
-  --text-main: #0f172a;          /* Cor de texto principal (Azul escuro/Quase preto para alto contraste) */
-  --text-muted: #64748b;         /* Cor de texto secundário e legendas (Cinza) */
-  --border-color: #e2e8f0;       /* Cor suave para linhas de divisão e bordas */
+  --primary-color: #3b82f6;
+  --primary-hover: #2563eb;
+  --bg-color: #f8fafc;
+  --card-bg: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
   
-  --badge-green-bg: #dcfce7;     /* Fundo verde claro para a etiqueta 'Disponível' */
-  --badge-green-text: #15803d;   /* Texto verde escuro para a etiqueta 'Disponível' */
-  --badge-yellow-bg: #fef9c3;    /* Fundo amarelo claro para a etiqueta 'Emprestado' */
-  --badge-yellow-text: #a16207;  /* Texto amarelo escuro para a etiqueta 'Emprestado' */
+  --badge-green-bg: #dcfce7;
+  --badge-green-text: #15803d;
+  --badge-yellow-bg: #fef9c3;
+  --badge-yellow-text: #a16207;
+  --badge-red-bg: #fee2e2;
+  --badge-red-text: #b91c1c;
 
-  --danger-color: #ef4444;       /* Cor vermelha para avisos e exclusões */
-  --danger-hover: #dc2626;       /* Vermelho mais escuro para hover de exclusão */
-
-  --radius: 8px;                 /* Arredondamento padrão dos cantos dos elementos */
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sombra suave dos cards */
+  --danger-color: #ef4444;
+  --radius: 8px;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-/* ==========================================
-   SEÇÃO 2: VARIÁVEIS DO TEMA ESCURO (DARK MODE)
-   Sobrescreve as variáveis quando o atributo `data-theme="dark"` é ativado na tag <html>.
-   ========================================== */
 [data-theme="dark"] {
-  --primary-color: #60a5fa;      /* Azul mais claro e brilhante para destacar no fundo escuro */
-  --primary-hover: #3b82f6;      /* Azul intermediário para o hover */
-  --bg-color: #0f172a;           /* Fundo principal bem escuro (Azul petróleo) */
-  --card-bg: #1e293b;            /* Fundo dos cartões em tom escuro intermediário */
-  --text-main: #f8fafc;          /* Texto principal em branco leve para fácil leitura */
-  --text-muted: #94a3b8;         /* Texto secundário em cinza claro */
-  --border-color: #334155;       /* Bordas em tom cinza escuro para divisão discreta */
+  --primary-color: #60a5fa;
+  --primary-hover: #3b82f6;
+  --bg-color: #0f172a;
+  --card-bg: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
 
-  --badge-green-bg: #064e3b;     /* Fundo verde escuro para a badge 'Disponível' no dark mode */
-  --badge-green-text: #6ee7b7;   /* Texto verde neon suave */
-  --badge-yellow-bg: #713f12;    /* Fundo marrom/amarelo escuro para a badge 'Emprestado' */
-  --badge-yellow-text: #fde047;  /* Texto amarelo brilhante */
+  --badge-green-bg: #064e3b;
+  --badge-green-text: #6ee7b7;
+  --badge-yellow-bg: #713f12;
+  --badge-yellow-text: #fde047;
+  --badge-red-bg: #7f1d1d;
+  --badge-red-text: #fca5a5;
 }
 
-/* ==========================================
-   SEÇÃO 3: RESET GLOBAL E ESTILOS BASE
-   Padroniza as margens e comportamentos básicos de todos os elementos HTML.
-   ========================================== */
 * {
-  box-sizing: border-box; /* Inclui bordas e paddings no cálculo da largura total dos elementos */
-  margin: 0;              /* Remove margens padrão do navegador */
-  padding: 0;             /* Remove espaçamentos internos padrão */
-  transition: background-color 0.2s ease, color 0.2s ease; /* Animação suave na troca de cores de tema */
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 body {
-  font-family: 'Inter', sans-serif; /* Aplica a tipografia moderna Inter em todo o site */
-  background-color: var(--bg-color);/* Aplica a cor de fundo dinamicamente baseada no tema */
-  color: var(--text-main);          /* Aplica a cor de texto padrão */
-  line-height: 1.5;                 /* Ajusta a altura da linha para facilitar a leitura */
-  padding-bottom: 2rem;             /* Garante espaçamento ao final da página */
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.5;
+  padding-bottom: 2rem;
 }
 
-/* Classe utilitária para centralizar o conteúdo com uma largura máxima padrão */
 .container {
-  max-width: 1200px; /* Impede que a tela se estique demais em monitores ultrawide */
-  margin: 0 auto;    /* Centraliza o container horizontalmente */
-  padding: 0 1rem;   /* Adiciona margem de segurança nas laterais */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-/* ==========================================
-   SEÇÃO 4: CABEÇALHO (HEADER)
-   ========================================== */
+/* HEADER & WIDGETS */
 .main-header {
-  background-color: var(--card-bg); /* Cor de fundo do cabeçalho */
-  border-bottom: 1px solid var(--border-color); /* Linha sutil de separação na parte inferior */
-  padding: 1.25rem 0;               /* Espaçamento vertical interno */
-  margin-bottom: 2rem;              /* Afasta o cabeçalho do conteúdo principal */
+  background-color: var(--card-bg);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1.25rem 0;
+  margin-bottom: 2rem;
 }
 
-/* Organiza o conteúdo interno do cabeçalho em linha com Flexbox */
 .header-content {
-  display: flex;                   /* Ativa o modo de layout flexível */
-  justify-content: space-between;  /* Empurra o título para a esquerda e os botões para a direita */
-  align-items: center;             /* Alinha os elementos verticalmente no centro */
-  flex-wrap: wrap;                 /* Quebra a linha automaticamente em celulares pequenos */
-  gap: 1rem;                       /* Espaçamento mínimo entre os elementos */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .main-header h1 {
-  font-size: 1.75rem;              /* Tamanho de fonte destacado para o título */
-  font-weight: 700;                /* Peso da fonte em negrito */
-  color: var(--primary-color);     /* Cor com destaque da marca */
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary-color);
 }
 
 .main-header p {
-  color: var(--text-muted);        /* Texto de descrição em tom secundário */
-  font-size: 0.9rem;               /* Tamanho de fonte levemente menor */
+  color: var(--text-muted);
+  font-size: 0.9rem;
 }
 
-/* Agrupa os botões e o relógio no canto direito do cabeçalho */
 .header-right {
-  display: flex;                   /* Coloca os itens em linha */
-  align-items: center;             /* Centraliza verticalmente */
-  gap: 1rem;                       /* Espaço de 1rem entre cada widget */
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-/* ==========================================
-   SEÇÃO 5: WIDGET DE DATA E HORA
-   ========================================== */
+.badge-role {
+  font-size: 0.75rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+  font-weight: 700;
+  background-color: var(--border-color);
+  color: var(--text-main);
+}
+
 .widget-datetime {
-  background-color: var(--bg-color); /* Fundo contrastante com o cabeçalho */
-  border: 1px solid var(--border-color); /* Borda fina arredondada */
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius);
-  padding: 0.4rem 0.8rem;            /* Espaçamento interno confortável */
-  text-align: right;                 /* Alinha o texto à direita */
-  font-size: 0.8rem;                 /* Fonte compacta */
+  padding: 0.4rem 0.8rem;
+  text-align: right;
+  font-size: 0.8rem;
 }
 
-.widget-date {
-  color: var(--text-muted);          /* Data em cor secundária discreta */
-  font-weight: 500;
-}
+.widget-date { color: var(--text-muted); font-weight: 500; }
+.widget-time { color: var(--primary-color); font-weight: 700; font-family: monospace; font-size: 0.95rem; }
 
-.widget-time {
-  color: var(--primary-color);       /* Hora em tom azul destacado */
-  font-weight: 700;                  /* Texto em negrito */
-  font-family: monospace;            /* Fonte monoespaçada para os números não balançarem */
-  font-size: 0.95rem;
-}
-
-/* ==========================================
-   SEÇÃO 6: BOTÃO DE TEMA (SOL/LUA)
-   ========================================== */
 .btn-theme {
   background-color: var(--bg-color);
   border: 1px solid var(--border-color);
   color: var(--text-main);
   padding: 0.5rem 0.75rem;
   border-radius: var(--radius);
-  cursor: pointer;                   /* Transforma o ponteiro do mouse em mãozinha clicável */
+  cursor: pointer;
   font-size: 1.1rem;
 }
 
-/* ==========================================
-   SEÇÃO 7: TELA DE AUTENTICAÇÃO (LOGIN / CADASTRO)
-   ========================================== */
+/* AUTHENTICATION */
 .auth-card {
-  max-width: 400px;                  /* Largura máxima do cartão de login */
-  margin: 3rem auto;                 /* Centraliza horizontalmente com espaço no topo */
+  max-width: 400px;
+  margin: 3rem auto;
   background-color: var(--card-bg);
   border-radius: var(--radius);
   border: 1px solid var(--border-color);
   padding: 2rem;
-  box-shadow: var(--shadow);          /* Aplica sombra para dar profundidade de cartão */
+  box-shadow: var(--shadow);
 }
 
-/* Abas de alternância entre Login e Cadastro */
 .auth-tabs {
-  display: flex;                     /* Distribui as duas abas lado a lado */
+  display: flex;
   margin-bottom: 1.5rem;
   border-bottom: 1px solid var(--border-color);
 }
 
 .auth-tab {
-  flex: 1;                           /* Faz cada aba ocupar exatamente 50% da largura */
+  flex: 1;
   padding: 0.5rem;
-  background: none;                  /* Remove fundo padrão do botão */
-  border: none;                      /* Remove bordas padrão */
+  background: none;
+  border: none;
   color: var(--text-muted);
   font-weight: 600;
   cursor: pointer;
-  border-bottom: 2px solid transparent; /* Reserva espaço para a linha da aba ativa */
+  border-bottom: 2px solid transparent;
 }
 
-/* Estilo da aba que está selecionada no momento */
 .auth-tab.active {
   color: var(--primary-color);
-  border-bottom-color: var(--primary-color); /* Linha azul abaixo da aba ativa */
+  border-bottom-color: var(--primary-color);
 }
 
-.auth-form h2 {
-  font-size: 1.25rem;
-  margin-bottom: 1.25rem;
-  text-align: center;
-}
+.auth-form h2 { font-size: 1.25rem; margin-bottom: 1.25rem; text-align: center; }
 
-/* ==========================================
-   SEÇÃO 8: CARDS DE ESTATÍSTICAS / DASHBOARD
-   ========================================== */
+/* DASHBOARD & NAVIGATION */
 .stats-grid {
-  display: grid;                     /* Layout em Grid automático */
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Cria colunas responsivas dinâmicas */
-  gap: 1rem;                         /* Espaço de 1rem entre os cartões */
-  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .stat-card {
@@ -202,42 +172,52 @@ body {
   padding: 1.25rem;
   box-shadow: var(--shadow);
   display: flex;
-  flex-direction: column;            /* Organiza o título em cima e o número embaixo */
+  flex-direction: column;
 }
 
-.stat-title {
-  font-size: 0.85rem;
+.stat-title { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; text-transform: uppercase; }
+.stat-number { font-size: 1.8rem; font-weight: 700; margin-top: 0.25rem; }
+.stat-card-fines .stat-number { color: var(--danger-color); }
+
+.nav-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.nav-tab {
+  padding: 0.75rem 1.25rem;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
   color: var(--text-muted);
-  font-weight: 500;
-  text-transform: uppercase;          /* Deixa o texto em letras maiúsculas */
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
 }
 
-.stat-number {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-top: 0.25rem;
+.nav-tab.active {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
 }
 
-/* ==========================================
-   SEÇÃO 9: LAYOUT PRINCIPAL (SPLIT GRID)
-   ========================================== */
+/* LAYOUT & FORM */
 .app-layout {
   display: grid;
-  grid-template-columns: 320px 1fr;  /* Formulário com 320px fixos à esquerda e Tabela ocupando o resto */
-  gap: 2rem;                         /* Espaçamento grande entre o formulário e a tabela */
-  align-items: start;                /* Alinha os blocos pelo topo */
+  grid-template-columns: 320px 1fr;
+  gap: 1.5rem;
+  align-items: start;
 }
 
-/* Regra de responsividade para telas menores que 900px (Tablets e Celulares) */
+.app-layout.full-width-layout {
+  grid-template-columns: 1fr;
+}
+
 @media (max-width: 900px) {
-  .app-layout {
-    grid-template-columns: 1fr;      /* Converte a tela para 1 única coluna vertical acumulada */
-  }
+  .app-layout { grid-template-columns: 1fr; }
 }
 
-/* ==========================================
-   SEÇÃO 10: FORMULÁRIO E SEÇÃO DA TABELA
-   ========================================== */
 .form-section, .table-section {
   background-color: var(--card-bg);
   border-radius: var(--radius);
@@ -246,111 +226,29 @@ body {
   box-shadow: var(--shadow);
 }
 
-.form-section h2 {
-  font-size: 1.25rem;
-  margin-bottom: 1.25rem;
+.table-section.full-width {
+  grid-column: 1 / -1;
 }
 
-/* Organização dos inputs em grupos verticais */
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
+.form-group { display: flex; flex-direction: column; margin-bottom: 1rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+label { font-size: 0.875rem; font-weight: 500; margin-bottom: 0.35rem; }
+.help-text { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem; }
 
-/* Agrupa dois campos lado a lado dentro do formulário */
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;    /* 50% de largura para cada campo */
-  gap: 0.75rem;
-}
-
-label {
-  font-size: 0.875rem;
-  font-weight: 500;
-  margin-bottom: 0.35rem;
-}
-
-/* Estilização padronizada de caixas de texto e seletores */
 input, select {
   padding: 0.6rem 0.75rem;
   border: 1px solid var(--border-color);
   border-radius: 6px;
   font-size: 0.9rem;
-  font-family: inherit;              /* Herda a fonte 'Inter' do body */
-  outline: none;                     /* Remove o contorno padrão do navegador ao focar */
   background-color: var(--card-bg);
   color: var(--text-main);
 }
 
-/* Efeito visual ao clicar/focar num campo de texto */
-input:focus, select:focus {
-  border-color: var(--primary-color);/* Destaca a borda do campo em azul */
-}
+input:focus, select:focus { border-color: var(--primary-color); outline: none; }
 
-.form-actions {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 1.25rem;
-}
+.form-actions { display: flex; gap: 0.5rem; margin-top: 1.25rem; }
 
-/* ==========================================
-   SEÇÃO 11: BOTÕES
-   ========================================== */
-.btn {
-  padding: 0.6rem 1rem;
-  border-radius: 6px;
-  font-weight: 500;
-  font-size: 0.9rem;
-  cursor: pointer;
-  border: none;
-}
-
-.btn-primary {
-  background-color: var(--primary-color);
-  color: white;
-  width: 100%;                       /* Botão de largura total */
-}
-
-.btn-primary:hover {
-  background-color: var(--primary-hover);
-}
-
-.btn-secondary {
-  background-color: var(--border-color);
-  color: var(--text-main);
-}
-
-/* Botões pequenos de ação da tabela */
-.btn-action {
-  padding: 0.3rem 0.6rem;
-  font-size: 0.8rem;
-  margin-right: 0.3rem;
-}
-
-.btn-edit {
-  background-color: #e0f2fe;        /* Azul bem claro */
-  color: #0369a1;                    /* Texto azul escuro */
-}
-
-[data-theme="dark"] .btn-edit {
-  background-color: #075985;        /* Ajuste do botão editar no dark mode */
-  color: #e0f2fe;
-}
-
-.btn-delete {
-  background-color: #fee2e2;        /* Vermelho bem claro */
-  color: #b91c1c;                    /* Texto vermelho escuro */
-}
-
-[data-theme="dark"] .btn-delete {
-  background-color: #991b1b;        /* Ajuste do botão excluir no dark mode */
-  color: #fee2e2;
-}
-
-/* ==========================================
-   SEÇÃO 12: TABELA DE DADOS E BUSCA
-   ========================================== */
+/* CONTROLES E ALTERNADOR DE VISÃO */
 .table-header-controls {
   display: flex;
   justify-content: space-between;
@@ -360,94 +258,125 @@ input:focus, select:focus {
   margin-bottom: 1.25rem;
 }
 
-.search-box input {
-  min-width: 260px;                  /* Define uma largura mínima confortável para a busca */
+.controls-right { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+
+.view-toggle {
+  display: flex;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 2px;
 }
 
-.table-responsive {
-  overflow-x: auto;                  /* Adiciona barra de rolagem horizontal se a tabela for muito larga */
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;         /* Remove espaço duplo entre bordas de células */
-  text-align: left;
-}
-
-th, td {
-  padding: 0.75rem 0.5rem;
-  border-bottom: 1px solid var(--border-color); /* Linha divisória entre cada linha da tabela */
-  font-size: 0.9rem;
-}
-
-th {
-  color: var(--text-muted);
-  font-weight: 600;
-}
-
-/* Botão invisível do cabeçalho da tabela usado para ordenação */
-.btn-sort {
+.btn-toggle {
   background: none;
   border: none;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-muted);
   cursor: pointer;
-  padding: 0;
-  font-size: 0.9rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
+  border-radius: 4px;
 }
 
-.btn-sort:hover {
-  color: var(--primary-color);
+.btn-toggle.active {
+  background-color: var(--primary-color);
+  color: white;
 }
 
-.sort-indicator {
-  font-size: 0.75rem;
-  opacity: 0.5;                      /* Seta opaca quando não está filtrando */
-  transition: opacity 0.2s ease, color 0.2s ease;
+/* CARDS / MODO GALERIA */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
 }
 
-/* Seta destacada quando a coluna é a selecionada no momento */
-.sort-indicator.active-sort {
-  opacity: 1;                        /* Torna a seta 100% visível */
-  color: var(--primary-color);
-  font-weight: bold;
+.book-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
 }
 
-/* ==========================================
-   SEÇÃO 13: ETIQUETAS DE STATUS (BADGES)
-   ========================================== */
-.badge {
-  padding: 0.25rem 0.5rem;
-  border-radius: 12px;                /* Cantos totalmente arredondados formato pílula */
-  font-size: 0.75rem;
-  font-weight: 600;
-  display: inline-block;
+.book-card-cover {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  background-color: var(--bg-color);
 }
 
-.badge-disponivel {
-  background-color: var(--badge-green-bg);
-  color: var(--badge-green-text);
+.book-card-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
-.badge-emprestado {
-  background-color: var(--badge-yellow-bg);
-  color: var(--badge-yellow-text);
+.book-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  color: var(--text-main);
 }
 
-/* ==========================================
-   SEÇÃO 14: CLASSES UTILITÁRIAS
-   ========================================== */
-/* Esconde qualquer elemento da tela quando adicionada */
-.hidden {
-  display: none !important;
-}
-
-/* Estilização para estados vazios ou de carregamento da tabela */
-.table-loading, .table-empty {
-  text-align: center;
+.book-card-author {
+  font-size: 0.85rem;
   color: var(--text-muted);
-  padding: 2rem 0;
+  margin-bottom: 0.75rem;
 }
+
+.book-card-meta {
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.book-card-actions {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* TABELAS */
+.table-responsive { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th, td { padding: 0.75rem 0.5rem; border-bottom: 1px solid var(--border-color); font-size: 0.9rem; }
+th { color: var(--text-muted); font-weight: 600; }
+
+.table-thumb {
+  width: 40px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 4px;
+  background-color: var(--bg-color);
+}
+
+.btn-sort {
+  background: none; border: none; font-weight: 600; color: var(--text-muted); cursor: pointer; padding: 0; font-size: 0.9rem;
+}
+
+.sort-indicator.active-sort { color: var(--primary-color); font-weight: bold; }
+
+/* BADGES & BOTÕES */
+.badge { padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; display: inline-block; }
+.badge-disponivel { background-color: var(--badge-green-bg); color: var(--badge-green-text); }
+.badge-emprestado { background-color: var(--badge-yellow-bg); color: var(--badge-yellow-text); }
+.badge-atrasado { background-color: var(--badge-red-bg); color: var(--badge-red-text); }
+
+.btn { padding: 0.6rem 1rem; border-radius: 6px; font-weight: 500; font-size: 0.9rem; cursor: pointer; border: none; }
+.btn-primary { background-color: var(--primary-color); color: white; width: 100%; }
+.btn-primary:hover { background-color: var(--primary-hover); }
+.btn-secondary { background-color: var(--border-color); color: var(--text-main); }
+.btn-action { padding: 0.3rem 0.6rem; font-size: 0.8rem; margin-right: 0.3rem; }
+.btn-edit { background-color: #e0f2fe; color: #0369a1; }
+.btn-delete { background-color: #fee2e2; color: #b91c1c; }
+.btn-return { background-color: #dcfce7; color: #15803d; }
+
+.hidden { display: none !important; }
+.table-loading, .table-empty { text-align: center; color: var(--text-muted); padding: 2rem 0; }
